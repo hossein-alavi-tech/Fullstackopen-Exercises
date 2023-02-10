@@ -1,5 +1,5 @@
 const Course = ({course}) => {
-  let sum = course.parts.map(part => part.exercises).reduce((a,b)=>(a+b))
+  let sum = course.parts.map(part => part.exercises).reduce((a,b)=>(a+b));
   console.log(sum)
   return (
     <div>
