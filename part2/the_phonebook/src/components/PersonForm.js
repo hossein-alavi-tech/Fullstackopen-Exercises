@@ -18,7 +18,7 @@ const PersonForm = ({ persons, setPersons }) => {
             return
         }
         personsService
-            .create({ name: newName, number: newNumber})
+            .create({ name: newName, number: newNumber })
             .then(response => {
                 setPersons(persons.concat(response.data))
                 setNewName('')
