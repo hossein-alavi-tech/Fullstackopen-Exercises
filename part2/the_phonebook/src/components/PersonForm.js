@@ -11,10 +11,24 @@ const PersonForm = ({ persons, setPersons }) => {
     const handleNumberChange = (event) => {
         setNewNumber(event.target.value)
     }
+
+    const getIdByName = (name, contacts) => {
+        const foundContact = contacts.find(contact => contact.name === name);
+        return foundContact ? foundContact.id : false;
+    }
     const addContact = (event) => {
         event.preventDefault()
-        if (persons.map(person => person.name).includes(newName)) {
-            alert(`${newName} is already added to the phonebook.`)
+        if (getIdByName(newName, persons)) {
+            if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+                personsService
+                    .update(getIdByName(newName, persons), { name: newName, number: newNumber })
+                    .then(response => {
+                        const updatedPersons = persons.map(person => person.id !== response.data.id ? person : response.data)
+                        setPersons(updatedPersons)
+                        setNewName('')
+                        setNewNumber('')
+                    })
+            }
             return
         }
         personsService

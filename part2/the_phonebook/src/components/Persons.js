@@ -2,12 +2,12 @@ import personsService from '../services/persons'
 
 const Persons = ({ persons, searchTerm, setPersons }) => {
 
-    const handleDelete = (id , name) => {
+    const handleDelete = (id, name) => {
         if (window.confirm(`Delete ${name}?`))
-        personsService.deleteItem(id)
-            .then(() => {
-                setPersons(persons.filter(person => person.id !== id))
-            })
+            personsService.deleteItem(id)
+                .then(() => {
+                    setPersons(persons.filter(person => person.id !== id))
+                })
     }
 
 
