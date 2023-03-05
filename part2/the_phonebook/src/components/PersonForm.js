@@ -28,6 +28,12 @@ const PersonForm = ({ persons, setPersons, setMessage }) => {
                         setNewName('')
                         setNewNumber('')
                     })
+                    .catch(() => {
+                        setMessage([`Information of ${newName} has already been removed from server.`, 'error'])
+                        setTimeout(() => {
+                            setMessage(null)
+                        }, 5000)
+                    })
             }
             return
         }
@@ -37,7 +43,7 @@ const PersonForm = ({ persons, setPersons, setMessage }) => {
                 setPersons(persons.concat(response.data))
                 setNewName('')
                 setNewNumber('')
-                setMessage(`Added ${newName} to the phonebook.`)
+                setMessage([`Added ${newName} to the phonebook.`,'normal'])
                 setTimeout(() => {
                     setMessage(null)
                 }, 5000)
